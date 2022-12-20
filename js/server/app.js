@@ -26,6 +26,19 @@ app.post('/api/todo', (req, res) => {
     return res.send('success');
 });
 
+app.delete('/api/todo/:id', (req, res) => {
+    const id = req.params.id;
+    console.log(id);
+
+    let index = todoList.findIndex(v=>v.id==id);
+    if(index != -1){
+        todoList.splice(index, 1);
+        return res.send('success');
+    } else {
+        return res.status(400).send('item not found in list.');
+    }
+});
+
 app.listen(4000, ()=>{
     console.log("server start...");
 });

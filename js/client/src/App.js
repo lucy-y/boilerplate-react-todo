@@ -18,6 +18,12 @@ function App() {
         // .then((data) => setTodoList(data));
     }
 
+    const deleteData = async (id) => {
+        await axios.delete(API_URL+`/`+id);
+        const response = await axios.get(API_URL);
+        setTodoList(response.data);
+    }
+
     useEffect(()=>{
         fetchData()
     }, []);
@@ -44,6 +50,7 @@ function App() {
 
     const deleteHandler = async (e) => {
         e.preventDefault();
+        deleteData(e.target.id);
         console.log(e);
     }
 
